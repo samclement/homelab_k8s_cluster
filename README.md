@@ -40,7 +40,7 @@ data:
 
 ## Installing helm
 
-- `kubectl apply -f rbac.yml`
+- `kubectl apply -f helm_rbac.yml`
 - `helm init --service-account tiller`
 
 ## Installing k8s dashboard
