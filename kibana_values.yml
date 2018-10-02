@@ -1,0 +1,5 @@
+env:
+  ELASTICSEARCH_URL: http://es-elasticsearch-client:9200
+image:
+  pullPolicy: Always
+  tag: 6.4.1

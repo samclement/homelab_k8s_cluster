@@ -43,7 +43,7 @@ data:
 - `kubectl apply -f helm_rbac.yml`
 - `helm init --service-account tiller`
 
-## Installing k8s dashboard
+## Installing k8s dashboard (optional)
 
 Current dashboard release `1.10.0` uses `heapster` for host metrics, however kubernetes `1.11` has deprecated heapster in favour of `metrics-server`. Until dashboard supports `metrics-server`, `heapster` needs to be installed manually:
 
@@ -77,6 +77,33 @@ To view the grafana dashboard:
 
 - `kubectl get secret -n monitoring grafana -o json | jq '.data["admin-password"]' -r | base64 --decode | pbcopy`
 - `kubectl -n monitoring port-forward <grafana_pod> 3000:3000`
+
+## Installing logging infrastructure (Elasticsearch/Fluent-bit/Kibana)
+
+### Elasticsearch:
+
+- `helm repo add incubator http://storage.googleapis.com/kubernetes-charts-incubator`
+- `helm install --name es --namespace logging incubator/elasticsearch -f elasticsearch_values.yml`
+
+### Fluent-bit:
+
+- `kubectl create namespace logging`
+- `kubectl create -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernetes-logging/master/fluent-bit-service-account.yaml`
+- `kubectl create -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernetes-logging/master/fluent-bit-role.yaml`
+- `kubectl create -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernetes-logging/master/fluent-bit-role-binding.yaml`
+
+- `kubectl create -f fluent-bit-configmap.yml`
+- `kubectl create -f fluent-bit-ds.yml`
+
+https://github.com/fluent/fluent-bit-kubernetes-logging
+
+### Kibana:
+
+- `helm install stable/kibana --name kib --namespace logging -f kibana_values.yml`
+
+To view aggregated logs:
+
+- `kubectl -n logging port-forward <kibana_pod> 5601`
 
 ## Uninstalling
 
