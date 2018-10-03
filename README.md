@@ -105,6 +105,8 @@ To view aggregated logs:
 
 - `kubectl -n logging port-forward <kibana_pod> 5601`
 
+A pre-configured logging dashboard can be imported by going to: Management > Saved Objets > Import and selecting the `kibana_dashboard.json` configuraiton file.
+
 ## Uninstalling
 
 - `kubectl drain <node name> --delete-local-data --force --ignore-daemonsets`
