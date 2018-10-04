@@ -94,7 +94,7 @@ data:
         Time_Keep   On
         # Command      |  Decoder | Field | Optional Action
         # =============|==================|=================
-        Decode_Field_As   escaped    log
+        Decode_Field_As    escaped    log
 
     [PARSER]
         Name        syslog
