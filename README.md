@@ -66,8 +66,8 @@ It is now possible to install prometheus:
 
 - `helm install --name mon --namespace monitoring  stable/prometheus`
 
-To view the prometheus dashboard: `kubectl port-forward <prometheus_server_pod> 9090:9090`.  
-To view prometheus alert manager: `kubectl port-forward <prometheus_alert_manager> 9093:9093`
+To view the prometheus dashboard: `kubectl -n monitoring port-forward <prometheus_server_pod> 9090`.  
+To view prometheus alert manager: `kubectl -n monitoring port-forward <prometheus_alert_manager> 9093`
 
 Grafana:
 
@@ -76,7 +76,7 @@ Grafana:
 To view the grafana dashboard:
 
 - `kubectl get secret -n monitoring grafana -o json | jq '.data["admin-password"]' -r | base64 --decode | pbcopy`
-- `kubectl -n monitoring port-forward <grafana_pod> 3000:3000`
+- `kubectl -n monitoring port-forward <grafana_pod> 3000`
 
 ## Installing logging infrastructure (Elasticsearch/Fluent-bit/Kibana)
 
@@ -87,7 +87,6 @@ To view the grafana dashboard:
 
 ### Fluent-bit:
 
-- `kubectl create namespace logging`
 - `kubectl create -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernetes-logging/master/fluent-bit-service-account.yaml`
 - `kubectl create -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernetes-logging/master/fluent-bit-role.yaml`
 - `kubectl create -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernetes-logging/master/fluent-bit-role-binding.yaml`
