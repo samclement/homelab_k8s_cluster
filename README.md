@@ -106,6 +106,12 @@ To view aggregated logs:
 
 A pre-configured logging dashboard can be imported by going to: Management > Saved Objets > Import and selecting the `kibana_dashboard.json` configuraiton file.
 
+### Ingress
+
+- `helm install --name ingress --namespace ingress stable/nginx-ingress -f ingress_values.yml`
+
+This will install ingress along with prometheus monitoring for both nginx and the default backend service.
+
 ## Uninstalling
 
 - `kubectl drain <node name> --delete-local-data --force --ignore-daemonsets`
