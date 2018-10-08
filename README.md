@@ -86,10 +86,16 @@ Grafana:
 
 - `helm install --name grafana --namespace monitoring -f grafana_values.yml stable/grafana`
 
-To view the grafana dashboard:
+#### Oauth2 Ingress
 
-- `kubectl get secret -n monitoring grafana -o json | jq '.data["admin-password"]' -r | base64 --decode | pbcopy`
-- `kubectl -n monitoring port-forward <grafana_pod> 3000`
+Ingress routes can be protected with Oauth2 authentication https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples/auth/oauth-external-auth
+
+1. Create an Oauth2 application in Github (https://grafana.swhurl.com, https://grafana.swhurl.com/oauth2)
+2. Replace placeholders for `client_id`, `client_secret` in `grafana_oauth2_proxy.yml`
+3. Create a cookie secret and replace the `cookie_secret` placeholder in `grafana_oauth2_proxy.yml`
+4. `kubectl apply -f grafana_oauth2_proxy.yml`
+
+This will create an oauth2 deployment that handles oauth callbacks for the hostname configured (in this case grafana.swhurl.com).
 
 ## Installing logging infrastructure (Elasticsearch/Fluent-bit/Kibana)
 
