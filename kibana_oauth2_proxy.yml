@@ -4,7 +4,7 @@ metadata:
   labels:
     k8s-app: kibana-oauth2-proxy
   name: kibana-oauth2-proxy
-  namespace: kube-system
+  namespace: logging
 spec:
   replicas: 1
   selector:
@@ -46,7 +46,7 @@ metadata:
   labels:
     k8s-app: kibana-oauth2-proxy
   name: kibana-oauth2-proxy
-  namespace: kube-system
+  namespace: logging
 spec:
   ports:
   - name: http
@@ -62,7 +62,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: kibana-oauth2-proxy
-  namespace: kube-system
+  namespace: logging
 spec:
   rules:
   - host: kibana.swhurl.com
