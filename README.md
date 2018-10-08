@@ -56,6 +56,13 @@ To access the dashboard with port-forwarding:
 
 Then access at https://localhost:8443
 
+## Installing cert-manager
+
+Cert-manager will provision TLS certificates from providers like LetsEncrypt:
+
+- `helm install --name cert-manager --namespace kube-system -f cert_manager_values.yml stable/cert-manager`
+- `k apply -f certificate_issuers.yml`
+
 ## Installing Prometheus and Grafana
 
 Prometheus will create persistent volume claims. To enable this create a `hostpath` volume provisioner:
