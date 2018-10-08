@@ -67,7 +67,7 @@ Cert-manager will provision TLS certificates from providers like LetsEncrypt:
 
 - `helm install --name ingress --namespace ingress stable/nginx-ingress -f ingress_values.yml`
 
-This will install ingress along with prometheus monitoring for both nginx and the default backend service.
+This will install an ingress controller and default backend. Prometheus monitoring is also made available for both containers using prometheus annotations.
 
 ## Installing Prometheus and Grafana
 
