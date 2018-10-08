@@ -63,6 +63,12 @@ Cert-manager will provision TLS certificates from providers like LetsEncrypt:
 - `helm install --name cert-manager --namespace kube-system -f cert_manager_values.yml stable/cert-manager`
 - `k apply -f certificate_issuers.yml`
 
+### Ingress
+
+- `helm install --name ingress --namespace ingress stable/nginx-ingress -f ingress_values.yml`
+
+This will install ingress along with prometheus monitoring for both nginx and the default backend service.
+
 ## Installing Prometheus and Grafana
 
 Prometheus will create persistent volume claims. To enable this create a `hostpath` volume provisioner:
@@ -112,12 +118,6 @@ To view aggregated logs:
 - `kubectl -n logging port-forward <kibana_pod> 5601`
 
 A pre-configured logging dashboard can be imported by going to: Management > Saved Objets > Import and selecting the `kibana_dashboard.json` configuraiton file.
-
-### Ingress
-
-- `helm install --name ingress --namespace ingress stable/nginx-ingress -f ingress_values.yml`
-
-This will install ingress along with prometheus monitoring for both nginx and the default backend service.
 
 ## Uninstalling
 
