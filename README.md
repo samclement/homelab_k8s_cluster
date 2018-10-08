@@ -78,7 +78,7 @@ To view prometheus alert manager: `kubectl -n monitoring port-forward <prometheu
 
 Grafana:
 
-- `helm install --name grafana --namespace monitoring -f grafana_values.yaml stable/grafana`
+- `helm install --name grafana --namespace monitoring -f grafana_values.yml stable/grafana`
 
 To view the grafana dashboard:
 
