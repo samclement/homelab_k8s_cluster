@@ -119,6 +119,17 @@ To view aggregated logs:
 
 A pre-configured logging dashboard can be imported by going to: Management > Saved Objets > Import and selecting the `kibana_dashboard.json` configuraiton file.
 
+#### Oauth2 Ingress (optional)
+
+Ingress routes can be protected with Oauth2 authentication https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples/auth/oauth-external-auth
+
+1. Create an Oauth2 application in Github (https://kibana.swhurl.com, https://kibana.swhurl.com/oauth2)
+2. Replace placeholders for `client_id`, `client_secret` in `oauth2_proxy.yml`
+3. Create a cookie secret and replace the `cookie_secret` placeholder in `kibana_oauth2_proxy.yml`
+4. `kubectl apply -f kibana_oauth2_proxy.yml`
+
+This will create an oauth2 deployment that handles oauth callbacks for the hostname configured (in this case kibana.swhurl.com).
+
 ## Uninstalling
 
 - `kubectl drain <node name> --delete-local-data --force --ignore-daemonsets`

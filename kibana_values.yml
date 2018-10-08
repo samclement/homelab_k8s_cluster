@@ -3,3 +3,18 @@ env:
 image:
   pullPolicy: Always
   tag: 6.4.2
+ingress:
+  enabled: true
+  annotations: 
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$request_uri"
+  labels: {}
+  path: /
+  hosts:
+    - kibana.swhurl.com
+  tls:
+    - secretName: kibana-swhurl-com-tls
+      hosts:
+        - kibana.swhurl.com
