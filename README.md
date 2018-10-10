@@ -136,8 +136,19 @@ Ingress routes can be protected with Oauth2 authentication https://github.com/ku
 
 This will create an oauth2 deployment that handles oauth callbacks for the hostname configured (in this case kibana.swhurl.com).
 
+## Installing Drone CI
+
+Drone provides a simple CI service. It includes its own Github Oauth2 integration and will need a properly configured Github Oauth2 appliction that includes a `client_id` and `client_secret`. The `client_id` can be included in the `drone_values.yml` file, however the secret must be created manually:
+
+- `kubectl create secret generic drone-server-secrets --from-literal=DRONE_GITHUB_SECRET=<client_secret>`
+
+Once the secret has been created, the main application can be installed:
+
+- `helm install --name drone stable/drone -f drone_values.yml`
+
 ## Uninstalling
 
 - `kubectl drain <node name> --delete-local-data --force --ignore-daemonsets`
 - `kubectl delete node <node name>`
 - `kubeadm reset`
+
