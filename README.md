@@ -104,6 +104,10 @@ This will create an oauth2 deployment that handles oauth callbacks for the hostn
 - `helm repo add incubator http://storage.googleapis.com/kubernetes-charts-incubator`
 - `helm install --name es --namespace logging incubator/elasticsearch -f elasticsearch_values.yml`
 
+Additionally, installing `curator` will help manage elasticsearch indices.
+
+- `helm install --name es-curator --namespace logging incubator/elasticsearch-curator -f elastic_search_curator.yml`
+
 ### Fluent-bit:
 
 - `kubectl create -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernetes-logging/master/fluent-bit-service-account.yaml`
