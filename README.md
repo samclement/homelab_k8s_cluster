@@ -27,6 +27,17 @@ data:
     ["8.8.8.8","8.8.4.4"]
 ``
 
+Update `coredns` to version `1.2.2`:
+
+```
+spec:
+  template:
+    spec:
+      containers:
+      - args:
+        image: k8s.gcr.io/coredns:1.2.2
+``
+
 - https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#example
 - https://github.com/kubernetes/minikube/issues/2027
       
