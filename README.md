@@ -17,21 +17,23 @@ Setting up kube config for the cluster:
 - `sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config`
 - `sudo chown $(id -u):$(id -g) $HOME/.kube/config`
 
-Edit `coredns` configmaps to use google nameservers:
-
-- `kubectl edit configmaps coredns -n kube-system`
-
 Enable the `kubelet` service:
 
 - `sudo systemctl enable kubelet.service`
 
-``
+Edit `coredns` configmaps to use google nameservers:
+
+- `kubectl edit configmaps coredns -n kube-system`
+
+```
 data:
   upstreamNameservers: |
     ["8.8.8.8","8.8.4.4"]
-``
+```
 
 Update `coredns` to version `1.2.2`:
+
+- `kubectl -n kube-system edit deployment coredns`
 
 ```
 spec:
@@ -40,7 +42,7 @@ spec:
       containers:
       - args:
         image: k8s.gcr.io/coredns:1.2.2
-``
+```
 
 - https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#example
 - https://github.com/kubernetes/minikube/issues/2027
