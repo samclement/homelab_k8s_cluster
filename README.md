@@ -8,7 +8,7 @@
 
 - `sudo su`
 - `swapoff -a`
-- `kubeadm init`
+- `kubeadm init --pod-network-cidr=10.244.0.0/16` (flag is necessary for flannel networking)
 - `exit`
 
 Setting up kube config for the cluster:
@@ -36,7 +36,8 @@ data:
       
 ## Install virtual networking
 
-- `kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"`
+- `sysctl net.bridge.bridge-nf-call-iptables=1`
+- `kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/bc79dd1505b0c8681ece4de4c0d86c5cd2643275/Documentation/kube-flannel.yml`
 
 ## Installing helm
 
