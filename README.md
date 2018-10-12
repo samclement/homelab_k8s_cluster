@@ -21,6 +21,10 @@ Edit `coredns` configmaps to use google nameservers:
 
 - `kubectl edit configmaps coredns -n kube-system`
 
+Enable the `kubelet` service:
+
+- `sudo systemctl enable kubelet.service`
+
 ``
 data:
   upstreamNameservers: |
