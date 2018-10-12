@@ -25,12 +25,12 @@ spec:
         # https://github.com/settings/applications/new
         env:
         - name: OAUTH2_PROXY_CLIENT_ID
-          value: e25993a54cdbac23ec04
+          value: <client_id>
         - name: OAUTH2_PROXY_CLIENT_SECRET
-          value: 9946084a37bd4b5bd3228cbc7b937e798af8cd20
+          value: <client_secret>
         # docker run -ti --rm python:3-alpine python -c 'import secrets,base64; print(base64.b64encode(base64.b64encode(secrets.token_bytes(16))));'
         - name: OAUTH2_PROXY_COOKIE_SECRET
-          value: R9WtOGzRZfFBKWU+5RQIFA==
+          value: <cookie_secret>
         image: docker.io/colemickens/oauth2_proxy:latest
         imagePullPolicy: Always
         name: grafana-oauth2-proxy
