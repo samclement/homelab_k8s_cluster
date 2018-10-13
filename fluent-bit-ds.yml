@@ -23,13 +23,14 @@ spec:
       - name: fluent-bit
         image: fluent/fluent-bit:0.14.4
         imagePullPolicy: Always
+        env:
+        - name: LOGGLY_CUSTOMER_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: loggly-secret
+              key: customer_token
         ports:
           - containerPort: 2020
-        env:
-        - name: FLUENT_ELASTICSEARCH_HOST
-          value: "es-elasticsearch-client"
-        - name: FLUENT_ELASTICSEARCH_PORT
-          value: "9200"
         volumeMounts:
         - name: varlog
           mountPath: /var/log

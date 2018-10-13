@@ -109,37 +109,23 @@ Ingress routes can be protected with Oauth2 authentication https://github.com/ku
 
 This will create an oauth2 deployment that handles oauth callbacks for the hostname configured (in this case grafana.swhurl.com).
 
-## Installing logging infrastructure (Elasticsearch/Fluent-bit/Kibana)
+## Installing fluent-bit to stream logs to loggly
 
-### Elasticsearch:
-
-- `helm repo add incubator http://storage.googleapis.com/kubernetes-charts-incubator`
-- `helm install --name es --namespace logging incubator/elasticsearch -f elasticsearch_values.yml`
-
-Additionally, installing `curator` will help manage elasticsearch indices.
-
-- `helm install --name es-curator --namespace logging incubator/elasticsearch-curator -f elastic_search_curator.yml`
+Set up a loggly account and get a `customer_token`.
 
 ### Fluent-bit:
 
 - `kubectl create -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernetes-logging/master/fluent-bit-service-account.yaml`
 - `kubectl create -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernetes-logging/master/fluent-bit-role.yaml`
 - `kubectl create -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernetes-logging/master/fluent-bit-role-binding.yaml`
+- `kubectl create secret generic --from-literal=<client_token> --namespace logging "loggly-secret"`
 
 - `kubectl create -f fluent-bit-configmap.yml`
 - `kubectl create -f fluent-bit-ds.yml`
 
 https://github.com/fluent/fluent-bit-kubernetes-logging
+https://moisesbm.wordpress.com/2018/08/25/kubernetes-with-fluent-bit-to-send-logs-to-loggly/
 
-### Kibana:
-
-- `helm install stable/kibana --name kib --namespace logging -f kibana_values.yml`
-
-To view aggregated logs:
-
-- `kubectl -n logging port-forward <kibana_pod> 5601`
-
-A pre-configured logging dashboard can be imported by going to: Management > Saved Objets > Import and selecting the `kibana_dashboard.json` configuraiton file.
 
 #### Oauth2 Ingress
 
