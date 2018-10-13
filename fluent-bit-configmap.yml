@@ -20,7 +20,7 @@ data:
 
     @INCLUDE input-kubernetes.conf
     @INCLUDE filter-kubernetes.conf
-    @INCLUDE output-elasticsearch.conf
+    @INCLUDE output-loggly.conf
 
   input-kubernetes.conf: |
     [INPUT]
@@ -41,17 +41,18 @@ data:
         Merge_Log           On
         K8S-Logging.Parser  On
 
-  output-elasticsearch.conf: |
+  output-loggly.conf: |
     [OUTPUT]
-        Name            es
+        Name            http
         Match           *
-        Host            es-elasticsearch-client
-        Port            9200
-        Logstash_Format On
-        Logstash_Prefix kubernetes-cluster
-        Time_Key        es_time
+        Host            logs-01.loggly.com
+        Port            443
+        Tls             On
+        URI             /bulk/${LOGGLY_CUSTOMER_TOKEN}/tag/homelab/
+        Format          json_lines
+        Json_Date_Key   timestamp
+        Json_Date_Format iso8601
         Retry_Limit     False
-        Gernate_ID      On
 
   parsers.conf: |
     [PARSER]
