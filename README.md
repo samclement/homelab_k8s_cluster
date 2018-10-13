@@ -21,17 +21,11 @@ Enable the `kubelet` service:
 
 - `sudo systemctl enable kubelet.service`
 
-Edit `coredns` configmaps to use google nameservers:
+Coredns defaults use `/etc/resolv.conf` for proxy/upstream lookups. If this does not work for your system you can apply the following to use google nameservers:
 
-- `kubectl edit configmaps coredns -n kube-system`
+- `kubectl apply -f coredns_configmap.yml`
 
-```
-data:
-  upstreamNameservers: |
-    ["8.8.8.8","8.8.4.4"]
-```
-
-Update `coredns` to version `1.2.2`:
+Update `coredns` to version `1.2.2` (optoinal):
 
 - `kubectl -n kube-system edit deployment coredns`
 
