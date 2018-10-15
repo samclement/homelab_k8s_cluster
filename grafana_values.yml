@@ -185,24 +185,16 @@ dashboards:
    #   json: |
    #     $RAW_JSON
    kube-dash:
-     gnetId: 6663
-     revision: 1
+     gnetId: 315
+     revision: 3
      datasource: Prometheus
    kube-cluster-summary:
      gnetId: 6417
      revision: 1
      datasource: Prometheus
-   kube-capacity:
-     gnetId: 5309
-     revision: 1
-     datasource: Prometheus
    node-view:
-     gnetId: 3320
-     revision: 1
-     datasource: Prometheus
-   kube-bitnami-dash:
-     gnetId: 3119
-     revision: 2
+     gnetId: 1860
+     revision: 12
      datasource: Prometheus
    prometheus-stats:
      gnetId: 2
