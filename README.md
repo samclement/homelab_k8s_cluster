@@ -126,28 +126,6 @@ Set up a loggly account and get a `customer_token`.
 https://github.com/fluent/fluent-bit-kubernetes-logging
 https://moisesbm.wordpress.com/2018/08/25/kubernetes-with-fluent-bit-to-send-logs-to-loggly/
 
-
-#### Oauth2 Ingress
-
-Ingress routes can be protected with Oauth2 authentication https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples/auth/oauth-external-auth
-
-1. Create an Oauth2 application in Github (https://kibana.swhurl.com, https://kibana.swhurl.com/oauth2)
-2. Replace placeholders for `client_id`, `client_secret` in `kibana_oauth2_proxy.yml`
-3. Create a cookie secret and replace the `cookie_secret` placeholder in `kibana_oauth2_proxy.yml`
-4. `kubectl apply -f kibana_oauth2_proxy.yml`
-
-This will create an oauth2 deployment that handles oauth callbacks for the hostname configured (in this case kibana.swhurl.com).
-
-## Installing Drone CI
-
-Drone provides a simple CI service. It includes its own Github Oauth2 integration and will need a properly configured Github Oauth2 appliction that includes a `client_id` and `client_secret`. The `client_id` can be included in the `drone_values.yml` file, however the secret must be created manually:
-
-- `kubectl create secret generic drone-server-secrets --from-literal=DRONE_GITHUB_SECRET=<client_secret>`
-
-Once the secret has been created, the main application can be installed:
-
-- `helm install --name drone stable/drone -f drone_values.yml`
-
 ## Uninstalling
 
 - `kubectl drain <node name> --delete-local-data --force --ignore-daemonsets`
