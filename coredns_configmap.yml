@@ -16,9 +16,5 @@ data:
     }
 kind: ConfigMap
 metadata:
-  creationTimestamp: 2018-10-12T22:16:26Z
   name: coredns
   namespace: kube-system
-  resourceVersion: "57573"
-  selfLink: /api/v1/namespaces/kube-system/configmaps/coredns
-  uid: 75acd8ff-ce6c-11e8-a96b-94c691178419
