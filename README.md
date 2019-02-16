@@ -126,6 +126,12 @@ Set up a loggly account and get a `customer_token`.
 https://github.com/fluent/fluent-bit-kubernetes-logging
 https://moisesbm.wordpress.com/2018/08/25/kubernetes-with-fluent-bit-to-send-logs-to-loggly/
 
+## Installing Minio
+
+Replace the placeholder `accessKey` and `secretKey` values.
+
+- `helm install --name storage -f minio_values.yml stable/minio`
+
 ## Uninstalling
 
 - `kubectl drain <node name> --delete-local-data --force --ignore-daemonsets`
