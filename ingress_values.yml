@@ -53,7 +53,7 @@ controller:
   ## If controller.stats.enabled = true and controller.metrics.enabled = true, Prometheus metrics will be exported
   ##
   metrics:
-    enabled: false
+    enabled: true
 
     service:
       annotations: 
