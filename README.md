@@ -72,8 +72,9 @@ Then access at https://localhost:8443
 
 Cert-manager will provision TLS certificates from providers like LetsEncrypt:
 
-- `helm install --name cert-manager --namespace kube-system -f cert_manager_values.yml stable/cert-manager`
-- `k apply -f certificate_issuers.yml`
+- `kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/<version>/deploy/manifests/00-crds.yaml`
+- `helm repo update`
+- `helm upgrade --version <version> <release_name> jetstack/cert-manager`
 
 ### Ingress
 
