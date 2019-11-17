@@ -32,6 +32,10 @@ Enable the `kubelet` service:
 
 Once the virtual networking pod is running, the `coredns` pods should change status from `pending` to `running`.
 
+## Install dynamic DNS
+
+- `https://github.com/samclement/aws-dns-updater`
+
 ## Installing cert-manager
 
 Cert-manager will provision TLS certificates from providers like LetsEncrypt:
