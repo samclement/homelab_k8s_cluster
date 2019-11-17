@@ -1,5 +1,0 @@
-ingressShim: 
-  defaultIssuerName: "letsencrypt-prod"
-  defaultIssuerKind: "ClusterIssuer"
-  defaultACMEChallengeType: "http01"
-  defaultACMEDNS01ChallengeProvider: ""
