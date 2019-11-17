@@ -65,8 +65,8 @@ Set up a loggly account and get a `customer_token`.
 - `kubectl create -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernetes-logging/master/fluent-bit-role-binding.yaml`
 - `kubectl create secret generic --from-literal=customer_token=<client_token> --namespace logging "loggly-secret"`
 
-- `kubectl create -f fluent-bit-configmap.yml`
-- `kubectl create -f fluent-bit-ds.yml`
+- `kubectl create -f fluent_bit_configmap.yaml`
+- `kubectl create -f fluent_bit_ds.yaml`
 
 https://github.com/fluent/fluent-bit-kubernetes-logging
 https://moisesbm.wordpress.com/2018/08/25/kubernetes-with-fluent-bit-to-send-logs-to-loggly/
@@ -75,7 +75,7 @@ https://moisesbm.wordpress.com/2018/08/25/kubernetes-with-fluent-bit-to-send-log
 
 Kubernetes needs to make a `StorageClass` available for minio:
 
-- `kubectl apply -f hostpath_storage.yml`
+- `kubectl apply -f hostpath_storage.yaml`
 
 Install minio:
 
