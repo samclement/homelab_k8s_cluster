@@ -56,7 +56,7 @@ Modify the namespace:
 - Update `deploy/cloud-generic/kustomization.yaml` with the new namespace
 - Update `deploy/static/mandatory.yaml` with the new namespace
 - `kubectl apply -f deploy/static/mandatory.yaml`
-- `kustomize build deploy/cloud-generic/kustomization.yaml | kubectl apply -f -`
+- `kustomize build deploy/cloud-generic | kubectl apply -f -`
 
 ## Installing fluent-bit to stream logs to loggly
 
