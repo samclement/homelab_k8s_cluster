@@ -60,7 +60,11 @@ Modify the namespace:
 
 ## Installing fluent-bit to stream logs to loggly
 
+Create a `logging` namespace:
+
 Set up a loggly account and get a `customer_token`.
+
+- `kubectl create namespace logging`
 
 ### Fluent-bit:
 
