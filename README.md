@@ -59,6 +59,12 @@ Modify the namespace:
 - `kubectl apply -f deploy/static/mandatory.yaml`
 - `kustomize build deploy/cloud-generic | kubectl apply -f -`
 
+To map home router ports to the correct `NodePorts`:
+
+- `kubectl get service`
+
+Use the `80` and `443` port mappings for the home router.
+
 ## Installing fluent-bit to stream logs to loggly
 
 Create a `logging` namespace:
