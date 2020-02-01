@@ -41,6 +41,7 @@ Once the virtual networking pod is running, the `coredns` pods should change sta
 Cert-manager will provision TLS certificates from providers like LetsEncrypt:
 
 - `kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v0.11.0/cert-manager.yaml`
+- `kubectl apply -f certificate_issuers.yaml`
 
 ### Ingress
 
