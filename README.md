@@ -99,6 +99,10 @@ Install minio:
 - `kubectl create -f https://github.com/minio/minio/blob/master/docs/orchestration/kubernetes/minio-standalone-service.yaml?raw=true`
 - `kubectl apply -f minio_ingress.yaml`
 
+To change credentials:
+
+https://docs.min.io/docs/minio-server-configuration-guide.html
+
 ## Uninstalling
 
 - `kubectl drain <node name> --delete-local-data --force --ignore-daemonsets`
