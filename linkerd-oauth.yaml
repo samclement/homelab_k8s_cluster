@@ -1,0 +1,91 @@
+apiVersion: v1
+data:
+  cookie_secret: c2Z5cTRmZzcybGFzZGYwMGFzZDg=
+  github_client_id: MDNkMDExYTJlNGI5NmNhZDhjNjQ=
+  github_client_secret: NThmZGVjNGM1NDdlNDY3ZDUwNjUyYzIyMGIxZTgwZjZlYTVjODJiOQ==
+kind: Secret
+metadata:
+  labels:
+    app: mesh-website-oauth2-proxy
+  name: mesh-swhurl-website-oauth2-proxy
+type: Opaque
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mesh-website-oauth2-proxy
+  name: mesh-swhurl-website-oauth2-proxy
+spec:
+  ports:
+  - name: http
+    port: 4180
+    protocol: TCP
+    targetPort: 4180
+  selector:
+    app: mesh-website-oauth2-proxy
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mesh-website-oauth2-proxy
+  name: mesh-swhurl-website-oauth2-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mesh-website-oauth2-proxy
+  template:
+    metadata:
+      labels:
+        app: mesh-website-oauth2-proxy
+    spec:
+      containers:
+      - args:
+        - --provider=github
+        - --email-domain=swhurl.com
+        - --upstream=file:///dev/null
+        - --http-address=0.0.0.0:4180
+        env:
+        - name: OAUTH2_PROXY_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: github_client_id
+              name: mesh-swhurl-website-oauth2-proxy
+        - name: OAUTH2_PROXY_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: github_client_secret
+              name: mesh-swhurl-website-oauth2-proxy
+        - name: OAUTH2_PROXY_COOKIE_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: cookie_secret
+              name: mesh-swhurl-website-oauth2-proxy
+        image: docker.io/colemickens/oauth2_proxy:latest
+        imagePullPolicy: Always
+        name: mesh-swhurl-website-oauth2-proxy
+        ports:
+        - containerPort: 4180
+          protocol: TCP
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: mesh-swhurl-website-oauth2-proxy
+  name: mesh-swhurl-website-oauth2-proxy
+spec:
+  rules:
+  - host: mesh.swhurl.com
+    http:
+      paths:
+      - backend:
+          serviceName: mesh-swhurl-website-oauth2-proxy
+          servicePort: 4180
+        path: /oauth2
+  tls:
+  - hosts:
+    - mesh.swhurl.com
+    secretName: mesh-swhurl-com-tls

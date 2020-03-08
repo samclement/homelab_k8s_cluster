@@ -103,6 +103,15 @@ To change credentials:
 
 https://docs.min.io/docs/minio-server-configuration-guide.html
 
+## Installing linkerd
+
+Linkerd is a simple service mesh. To install see https://linkerd.io/2/getting-started/
+
+- `kubectl apply -f linkerd-ingress.yaml`
+- `kubectl apply -f linkerd-oauth.yaml`
+
+Linkerd installs into its own namespace (`linkerd`). To make the dashboards externally accessible it's necessary to create an ingress that links to the service in the `linkerd` namespace. This is done via the `ExternalName` resource, see `linkerd-ingress.yaml` or https://blog.donbowman.ca/2018/09/06/accessing-a-service-in-a-different-namespace-from-a-single-ingress-in-kubernetes/.
+
 ## Uninstalling
 
 - `kubectl drain <node name> --delete-local-data --force --ignore-daemonsets`
