@@ -54,10 +54,10 @@ Clone the repo:
 
 Modify the namespace:
 
-- Update `deploy/cloud-generic/kustomization.yaml` with the new namespace
 - Update `deploy/static/mandatory.yaml` with the new namespace
+- Update `deploy/static/provider/baremetal/service-nodeport.yaml` with the new namespace
 - `kubectl apply -f deploy/static/mandatory.yaml`
-- `kustomize build deploy/cloud-generic | kubectl apply -f -`
+- `kubectl apply -f deploy/static/provider/baremetal/service-nodeport.yaml`
 
 To map home router ports to the correct `NodePorts`:
 
