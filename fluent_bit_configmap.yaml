@@ -41,6 +41,17 @@ data:
         Merge_Log           On
         K8S-Logging.Parser  On
 
+    [FILTER]
+        Name            nest
+        Match           *
+        Operation       lift
+        Nested_under    kubernetes
+
+    [FILTER]
+        Name            grep
+        Match           *
+        Exclude container_name fluent-bit
+
   output-loggly.conf: |
     [OUTPUT]
         Name            http
